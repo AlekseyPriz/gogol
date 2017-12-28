@@ -1,0 +1,12 @@
+   {
+     url: 'https://kassa.cc/valuta.xml'
+   },
+   {
+     url: 'https://fastchange.cc/valuta.xml'
+   },
+   {
+     url: 'http://superobmenka.com/ru/export/xml'
+   },
+   {
+     url: 'https://4exchange.cash'
+    },
