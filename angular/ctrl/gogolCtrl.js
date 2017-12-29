@@ -30,8 +30,8 @@ app.controller('exchangersCtrl', function ($scope, $http) {
     }
   };
 
-  let host = 'https://evening-falls-64086.herokuapp.com';
-  // let host = 'http://localhost:3000';
+  // let host = 'https://evening-falls-64086.herokuapp.com';
+  let host = 'http://localhost:3000';
 
 
   $scope.getExchangeRate = function (from, to) {
