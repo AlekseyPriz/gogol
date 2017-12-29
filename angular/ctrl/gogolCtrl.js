@@ -30,8 +30,13 @@ app.controller('exchangersCtrl', function ($scope, $http) {
     }
   };
 
+  let host = 'https://evening-falls-64086.herokuapp.com';
+  // let host = 'http://localhost:3000';
+
+
   $scope.getExchangeRate = function (from, to) {
-    $http.get('http://localhost:3000/exchange/'+ from + '/' + to)
+    $http.get(host +'/exchange/'+ from + '/' + to)
+//    $http.get('http://localhost:3000/exchange/'+ from + '/' + to)
       .then(function (result) {
         console.log('Курсы получены', result.data);
         $scope.exchs = result.data;
@@ -67,7 +72,8 @@ app.controller('exchangersCtrl', function ($scope, $http) {
   ];
 
 
-  $http.get('http://localhost:3000/start')
+  $http.get(host + '/start')
+//  $http.get('http://localhost:3000/start')
     .then(function (result) {
       console.log('Курсы получены', result.data);
       $scope.exchs = result.data;

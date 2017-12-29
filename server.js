@@ -33,7 +33,7 @@ app.get('/exchange/:from/:to', routes.group);
 
 
 app.listen(port, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Example app listening on port ', port);
 });
 
 
