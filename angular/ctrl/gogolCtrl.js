@@ -44,35 +44,35 @@ app.controller('exchangersCtrl', function ($scope, $http) {
     {currencyFrom: 'BTC'},
     {currencyFrom: 'ETH'},
     {currencyFrom: 'DASH'},
-    {currencyFrom: 'WMR'},
-    {currencyFrom: 'WMU'},
-    {currencyFrom: 'RBKMRUB'},
-    {currencyFrom: 'PPRUB'},
-    {currencyFrom: 'CARDUSD'},
-    {currencyFrom: 'CARDRUB'},
-    {currencyFrom: 'CARDUAH'},
+    // {currencyFrom: 'WMR'},
+    // {currencyFrom: 'WMU'},
+    // {currencyFrom: 'RBKMRUB'},
+    // {currencyFrom: 'PPRUB'},
+    // {currencyFrom: 'CARDUSD'},
+    // {currencyFrom: 'CARDRUB'},
+    // {currencyFrom: 'CARDUAH'},
     ];
 
   $scope.volutesTo = [
     {currencyTo: 'CARDRUB'},
     {currencyTo: 'BTC'},
     {currencyTo: 'DASH'},
-    {currencyTo: 'WMR'},
-    {currencyTo: 'WMU'},
-    {currencyTo: 'RBKMRUB'},
-    {currencyTo: 'PPRUB'},
-    {currencyTo: 'CARDUSD'},
-    {currencyTo: 'CARDRUB'},
-    {currencyTo: 'CARDUAH'},
+    // {currencyTo: 'WMR'},
+    // {currencyTo: 'WMU'},
+    // {currencyTo: 'RBKMRUB'},
+    // {currencyTo: 'PPRUB'},
+    // {currencyTo: 'CARDUSD'},
+    // {currencyTo: 'CARDRUB'},
+    // {currencyTo: 'CARDUAH'},
   ];
 
 
-  // $http.get('http://localhost:3000/start')
-  //   .then(function (result) {
-  //     console.log('Курсы получены', result.data);
-  //     $scope.exchs = result.data;
-  //   }, function (err) {
-  //     console.log('Err', err);
-  //   });
+  $http.get('http://localhost:3000/start')
+    .then(function (result) {
+      console.log('Курсы получены', result.data);
+      $scope.exchs = result.data;
+    }, function (err) {
+      console.log('Err', err);
+    });
 });
 
