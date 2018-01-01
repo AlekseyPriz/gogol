@@ -13,6 +13,7 @@
             crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="angular/css/style.css">
 
@@ -34,10 +35,10 @@
         <ul class="collection">
             <li class="collection-item" ng-repeat="currency in volutesFrom">
                 <div ng-click="setCurrencyPareFrom(currency.currencyFrom)" >
-                    <div class="chip" ng-if="!activeCurrencyFrom(currency.currencyFrom)" >
+                    <div class="" ng-if="!activeCurrencyFrom(currency.currencyFrom)" >
                         {{currency.currencyFrom}}
                     </div>
-                    <div class="chip lime" ng-if="activeCurrencyFrom(currency.currencyFrom)" >
+                    <div class=" lime" ng-if="activeCurrencyFrom(currency.currencyFrom)" >
                         {{currency.currencyFrom}}
                     </div>
                 </div>
@@ -50,10 +51,10 @@
         <ul class="collection">
             <li class="collection-item" ng-repeat="currency in volutesTo">
                 <div ng-click="setCurrencyPareTo(currency.currencyTo)">
-                    <div class="chip" ng-if="!activeCurrencyTo(currency.currencyTo)">
+                    <div class="" ng-if="!activeCurrencyTo(currency.currencyTo)">
                         {{currency.currencyTo}}
                     </div>
-                    <div class="chip red" ng-if="activeCurrencyTo(currency.currencyTo)">
+                    <div class=" red" ng-if="activeCurrencyTo(currency.currencyTo)">
                         {{currency.currencyTo}}
                     </div>
                 </div>

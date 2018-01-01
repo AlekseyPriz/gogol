@@ -1,6 +1,6 @@
 module.exports = [
   {
-    name: 'Kassa     ',
+    name: 'Kassa',
     url: 'https://kassa.cc/valuta.xml'
   },
   {
@@ -8,15 +8,15 @@ module.exports = [
     url: 'https://fastchange.cc/valuta.xml'
   },
   {
-    name: '4exchange ',
+    name: '4exchange',
     url: 'https://4exchange.cash/rates.html?sType=xml'
   },
   {
-    name: '24obmin ',
+    name: '24obmin',
     url: 'https://24obmin.com/rates.html?sType=estandarts_xml'
   },
   {
-    name: 'blue.cash ',
+    name: 'blue.cash',
     url: 'https://blue.cash/site/export?type=xml'
   }
 ];

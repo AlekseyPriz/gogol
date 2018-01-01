@@ -15,10 +15,10 @@ app.get('/', function(req, res) {
 app.get('/start', routes.start);
 app.get('/singl', routes.single);
 app.get('/exchange/:from/:to', routes.group);
-
+app.get('/big', routes.bigArr);
 
 app.listen(port, function () {
-  console.log('Example app listening on port ', port);
+  console.log('Приложение запущено на порту: ', port);
 });
 
 

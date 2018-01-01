@@ -1,6 +1,10 @@
 app.controller('exchangersCtrl', function ($scope, $http) {
   console.log('Гоголь контроллер подключен');
 
+  $scope.rates = [];
+  $scope.volutesFrom = [];
+  $scope.volutesTo = [];
+
   $scope.currencyPare = {
     from: null,
     to: null
@@ -16,7 +20,7 @@ app.controller('exchangersCtrl', function ($scope, $http) {
 
   $scope.setCurrencyPareFrom = function (from) {
     $scope.currencyPare.from = from;
-    console.log($scope.currencyPare);
+    $scope.volutesTo = _.map(_.filter($scope.rates, (rate) => { return rate.from[0] === from }), (n) => { return { currencyTo: n.to[0]}});
     if ($scope.currencyPare.from != null && $scope.currencyPare.to != null) {
       $scope.getExchangeRate($scope.currencyPare.from , $scope.currencyPare.to)
     }
@@ -24,7 +28,7 @@ app.controller('exchangersCtrl', function ($scope, $http) {
 
   $scope.setCurrencyPareTo = function (to) {
     $scope.currencyPare.to = to;
-    console.log($scope.currencyPare);
+    //console.log($scope.currencyPare);
     if ($scope.currencyPare.from != null && $scope.currencyPare.to != null) {
       $scope.getExchangeRate($scope.currencyPare.from , $scope.currencyPare.to)
     }
@@ -35,48 +39,40 @@ app.controller('exchangersCtrl', function ($scope, $http) {
 
 
   $scope.getExchangeRate = function (from, to) {
-    $http.get(host +'/exchange/'+ from + '/' + to)
-      .then(function (result) {
-        console.log('Курсы получены', result.data);
-        $scope.exchs = result.data;
-      }, function (err) {
-        console.log('Err', err);
-      });
+    $scope.exchs = _.filter($scope.rates, (rate) => {
+      return rate.from[0] === from && rate.to[0] === to;
+    });
+    // Запрос на сервер для получения результатов обмена:
+    // $http.get(host +'/exchange/'+ from + '/' + to)
+    //   .then(function (result) {
+    //     console.log('Курсы получены', result.data);
+    //     $scope.exchs = result.data;
+    //   }, function (err) {
+    //     console.log('Err', err);
+    //   });
   };
 
-  $scope.volutesFrom = [
-    {currencyFrom: 'BTC'},
-    {currencyFrom: 'ETH'},
-    {currencyFrom: 'DASH'},
-    // {currencyFrom: 'WMR'},
-    // {currencyFrom: 'WMU'},
-    // {currencyFrom: 'RBKMRUB'},
-    // {currencyFrom: 'PPRUB'},
-    // {currencyFrom: 'CARDUSD'},
-    // {currencyFrom: 'CARDRUB'},
-    // {currencyFrom: 'CARDUAH'},
-    ];
+// Стартовый запрос для отображения курса Биткоина на Доллары
+  // $http.get(host + '/start')
+  //   .then(function (result) {
+  //     console.log('Курсы получены', result.data);
+  //     $scope.exchs = result.data;
+  //   }, function (err) {
+  //     console.log('Err', err);
+  //   });
 
-  $scope.volutesTo = [
-    {currencyTo: 'CARDRUB'},
-    {currencyTo: 'BTC'},
-    {currencyTo: 'DASH'},
-    // {currencyTo: 'WMR'},
-    // {currencyTo: 'WMU'},
-    // {currencyTo: 'RBKMRUB'},
-    // {currencyTo: 'PPRUB'},
-    // {currencyTo: 'CARDUSD'},
-    // {currencyTo: 'CARDRUB'},
-    // {currencyTo: 'CARDUAH'},
-  ];
-
-
-  $http.get(host + '/start')
+  $http.get(host + '/big')
     .then(function (result) {
-      console.log('Курсы получены', result.data);
-      $scope.exchs = result.data;
+      console.log('Курсы получены => ', result.data);
+      $scope.rates = result.data;
+      $scope.volutesFrom = _.uniqBy(_.map(result.data, (n) => { return { currencyFrom: n.from[0]}}), 'currencyFrom');
+      $scope.volutesTo = _.uniqBy(_.map(result.data, (n) => { return { currencyTo: n.to[0]}}), 'currencyTo');
+
+
+        console.log('Uniq => ',  $scope.volutesFrom);
     }, function (err) {
       console.log('Err', err);
     });
+
 });
 
