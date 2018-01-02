@@ -61,12 +61,23 @@ app.controller('exchangersCtrl', function ($scope, $http) {
   //     console.log('Err', err);
   //   });
 
+  let sortVolutes = function (arr, way) {
+    if (way === 'from') {
+      return _.uniqBy(_.map(arr, (n) => { return { currencyFrom: n.from[0]}}), 'currencyFrom');
+    } else if (way === 'to') {
+      return _.uniqBy(_.map(arr, (n) => { return { currencyTo: n.to[0]}}), 'currencyTo');
+    }
+  };
+  
   $http.get(host + '/big')
     .then(function (result) {
       console.log('Курсы получены => ', result.data);
       $scope.rates = result.data;
-      $scope.volutesFrom = _.uniqBy(_.map(result.data, (n) => { return { currencyFrom: n.from[0]}}), 'currencyFrom');
-      $scope.volutesTo = _.uniqBy(_.map(result.data, (n) => { return { currencyTo: n.to[0]}}), 'currencyTo');
+      $scope.volutesFrom = sortVolutes(result.data, 'from');
+      $scope.volutesTo = sortVolutes(result.data, 'to');
+
+      //$scope.volutesFrom = _.uniqBy(_.map(result.data, (n) => { return { currencyFrom: n.from[0]}}), 'currencyFrom');
+      //$scope.volutesTo = _.uniqBy(_.map(result.data, (n) => { return { currencyTo: n.to[0]}}), 'currencyTo');
 
 
         console.log('Uniq => ',  $scope.volutesFrom);
