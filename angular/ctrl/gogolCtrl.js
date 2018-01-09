@@ -69,16 +69,13 @@ app.controller('exchangersCtrl', function ($scope, $http) {
     }
   };
   
-  $http.get(host + '/big')
+  // $http.get(host + '/big')
+  $http.get(host + '/crlr')
     .then(function (result) {
-      console.log('Курсы получены => ', result.data);
+      console.log('Курсы получены => ', result.data[0]);
       $scope.rates = result.data;
       $scope.volutesFrom = sortVolutes(result.data, 'from');
       $scope.volutesTo = sortVolutes(result.data, 'to');
-
-      //$scope.volutesFrom = _.uniqBy(_.map(result.data, (n) => { return { currencyFrom: n.from[0]}}), 'currencyFrom');
-      //$scope.volutesTo = _.uniqBy(_.map(result.data, (n) => { return { currencyTo: n.to[0]}}), 'currencyTo');
-
 
         console.log('Uniq => ',  $scope.volutesFrom);
     }, function (err) {

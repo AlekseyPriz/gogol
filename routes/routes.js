@@ -1,5 +1,6 @@
 // Переписать используя принцым DRY
 const https = require('https');
+const path = require('path');
 const onlineBitcoinParser = require('../parsers/onlineBitcoinParser');
 const exchangers = require('../exchangers/exchangers');
 const asyncMap = require('async-map');
@@ -10,6 +11,10 @@ const fs = require('fs');
 ////
 
 module.exports = {
+  // main: (req, res) => {
+  //   res.sendFile(path.join(__dirname + '/static/index.html'));
+  // },
+
   start: (req, res) => {
     asyncMap(exchangers,
       (exchanger, cbAsyncMap) => {
