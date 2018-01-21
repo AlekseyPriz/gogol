@@ -28,6 +28,9 @@ app.use('/angular', express.static(path.join(__dirname, '/angular')));
 ///// конец краулера
 
 app.get('/', function(req, res) { res.sendFile(path.join(__dirname + '/static/index.html'));});
+app.get('/article', function(req, res) { res.sendFile(path.join(__dirname + '/static/article.html'));});
+
+
 // app.get('/', routes.main());
 
 app.get('/start', routes.start); // на выходе массив курсов биткоина в доллары

@@ -8,9 +8,9 @@ const fs = require('fs');
 ////
 const exchenger = {
     name: 'idram',
-  //  url: 'https://kassa.cc/valuta.xml'
+   url: 'https://kassa.cc/valuta.xml'
    // url: 'https://idram.armchange.ru/exportxml.xml'
-    url: 'https://bankcomat.com/valuta.xml'
+   //  url: 'https://bankcomat.com/valuta.xml'
 
 
 };
