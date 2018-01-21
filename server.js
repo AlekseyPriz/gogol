@@ -12,15 +12,16 @@ app.use('/angular', express.static(path.join(__dirname, '/angular')));
 
 ///// запуск краулера
 
-let crauler = require('./crauler');
-let craulerData;
-
-setInterval(() => {
-  crauler((err, result) => {
-    craulerData = result;
-    console.log('Результат Краулера из server.js');//, result);
-  });
-},600000);
+// let crauler = require('./crauler');
+// let craulerData;
+//
+// setInterval(() => {
+//   crauler((err, result) => {
+//     craulerData = result;
+//     console.log('Результат Краулера из server.js');//, result);
+//   });
+// //},600000);
+// },10000);
 
 
 

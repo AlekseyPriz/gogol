@@ -11,9 +11,6 @@ const fs = require('fs');
 ////
 
 module.exports = {
-  // main: (req, res) => {
-  //   res.sendFile(path.join(__dirname + '/static/index.html'));
-  // },
 
   start: (req, res) => {
     asyncMap(exchangers,
@@ -93,23 +90,27 @@ module.exports = {
   bigArr: (req, res) => {
     asyncMap(exchangers,
       (exchanger, cbAsyncMap) => {
+
         function handler(response) {
           let data = '';
           response.on('data', function (chunk) {
             data += chunk; });
           response.on('end', function () {
-            process(data, exchanger.name);
+            process(data, exchanger);
           });
         }
-        function process(data, name) {
+
+        function process(data, exchanger) {
           return parseString(data, function (err, resultArr) {
             cbAsyncMap(null, _.map(resultArr.rates.item, para => {
-              para.ex = name;
+              para.ex = exchanger.name;
+              para.startPage = exchanger.startPage;
               return para;
               })
             );
           })
         }
+
         const request = https.request(exchanger.url);
         request.on('response', handler);
         request.end();

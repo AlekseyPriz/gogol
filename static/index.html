@@ -20,56 +20,126 @@
 </head>
 <body ng-controller="exchangersCtrl">
 
-<nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Гоголь</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a ng-click="getExchangeRate('BTC', 'CARDRUB')">BTC -> CARDRUB</a>
-        </ul>
+<nav class=" yellow accent-1">
+    <div class="marging: 100px">
+        <a href="#" class="brand-logo black-text" style="margin-left: 50px;">
+            GOGOL
+        </a>
+
     </div>
 </nav>
 
-<div class="row" ng-cloak>
-    <div class="col s2 offset-s1 teal">
 
-        <ul class="collection">
-            <li class="collection-item" ng-repeat="currency in volutesFrom">
-                <div ng-click="setCurrencyPareFrom(currency.currencyFrom)" >
-                    <div class="" ng-if="!activeCurrencyFrom(currency.currencyFrom)" >
-                        {{currency.currencyFrom}}
+
+
+<div class="row" ng-cloak>
+    <div class="col s2 offset-s1 ">
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th>Отдаете</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="currency in volutesFrom">
+                <td>
+                    <div ng-click="setCurrencyPareFrom(currency.currencyFrom)" >
+                        <div class="" ng-if="!activeCurrencyFrom(currency.currencyFrom)" >
+                            {{currency.currencyFrom}}
+                        </div>
+                        <div ng-if="activeCurrencyFrom(currency.currencyFrom)" >
+                        <span style="font-weight: bolder; color: #039be5;">
+                            {{currency.currencyFrom}}
+                        </span>
+
+                        </div>
                     </div>
-                    <div class=" lime" ng-if="activeCurrencyFrom(currency.currencyFrom)" >
-                        {{currency.currencyFrom}}
-                    </div>
-                </div>
-            </li>
-        </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
 
 
     </div>
-    <div class="col s2 blue">
-        <ul class="collection">
-            <li class="collection-item" ng-repeat="currency in volutesTo">
-                <div ng-click="setCurrencyPareTo(currency.currencyTo)">
-                    <div class="" ng-if="!activeCurrencyTo(currency.currencyTo)">
-                        {{currency.currencyTo}}
+    <div class="col s2 ">
+
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Получаете</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="currency in volutesTo">
+                <td>
+                    <div ng-click="setCurrencyPareTo(currency.currencyTo)">
+                        <div class="" ng-if="!activeCurrencyTo(currency.currencyTo)">
+                            {{currency.currencyTo}}
+                        </div>
+                        <div ng-if="activeCurrencyTo(currency.currencyTo)">
+                        <span style="font-weight: bolder; color: #039be5;">
+                            {{currency.currencyTo}}
+                        </span>
+                        </div>
                     </div>
-                    <div class=" red" ng-if="activeCurrencyTo(currency.currencyTo)">
-                        {{currency.currencyTo}}
-                    </div>
-                </div>
-            </li>
-        </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="col s6">
-        <ul class="collection">
-            <li class="collection-item" ng-repeat="ex in exchs">
-                {{ex.ex}} - {{ex.in[0]}} ({{ex.from[0]}}) => {{ex.out[0]}} ({{ex.to[0]}}) (Остаток: {{ex.amount[0]}}. Минимум: {{ex.minamount[0] || '000.1 BTC'}})
-            </li>
-        </ul>
+        <table>
+            <thead>
+            <tr>
+                <th>Обменник</th>
+                <th>Отдаете</th>
+                <th>Получаете</th>
+                <th>Остаток</th>
+                <th>Минимум</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="ex in exchs">
+                    <td><a href="{{ex.startPage}}">{{ex.ex}}</a></td>
+                    <td>{{ex.in[0]  | currency:"" }} <span class="grey-text">({{ex.from[0]}})</span></td>
+                    <td>{{ex.out[0] | currency:""}} <span class="grey-text">({{ex.to[0]}})</span></td>
+                    <td>{{ex.amount[0] | currency:""}}</td>
+                    <td>{{ex.minamount[0] }}</td>
+
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<footer class="page-footer yellow accent-1">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="black-text">Гоголь</h5>
+                <p class="black-text">Сервис мониторинга обменников электронных валют</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <ul>
+                    <li><a class="black-text" href="#!">Новости</a></li>
+                    <li><a class="black-text" href="#!">Статьи</a></li>
+                    <li><a class="black-text" href="#!">Правила</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container black-text">
+            © 2018 Gogol - сервис мониторинга обменников электронных валют
+        </div>
+    </div>
+</footer>
 
 
 

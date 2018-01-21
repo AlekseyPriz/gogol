@@ -69,10 +69,10 @@ app.controller('exchangersCtrl', function ($scope, $http) {
     }
   };
   
-  // $http.get(host + '/big')
-  $http.get(host + '/crlr')
+  $http.get(host + '/big')
+  // $http.get(host + '/crlr')
     .then(function (result) {
-      console.log('Курсы получены => ', result.data[0]);
+      console.log('Курсы получены => ', result.data);
       $scope.rates = result.data;
       $scope.volutesFrom = sortVolutes(result.data, 'from');
       $scope.volutesTo = sortVolutes(result.data, 'to');
