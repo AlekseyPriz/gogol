@@ -4,6 +4,9 @@ app.controller('exchangersCtrl', function ($scope, $http) {
   $scope.rates = [];
   $scope.volutesFrom = [];
   $scope.volutesTo = [];
+  $scope.nomberOfExchangers = null;
+  $scope.nomberOfcurrencyPare = null;
+
 
   $scope.currencyPare = {
     from: null,
@@ -20,7 +23,7 @@ app.controller('exchangersCtrl', function ($scope, $http) {
 
   $scope.setCurrencyPareFrom = function (from) {
     $scope.currencyPare.from = from;
-    $scope.volutesTo = _.map(_.filter($scope.rates, (rate) => { return rate.from[0] === from }), (n) => { return { currencyTo: n.to[0]}});
+    $scope.volutesTo = _.map(_.filter($scope.rates, (rate) => { return rate.from === from }), (n) => { return { currencyTo: n.to}});
     if ($scope.currencyPare.from != null && $scope.currencyPare.to != null) {
       $scope.getExchangeRate($scope.currencyPare.from , $scope.currencyPare.to)
     }
@@ -34,13 +37,15 @@ app.controller('exchangersCtrl', function ($scope, $http) {
     }
   };
 
-  let host = 'https://evening-falls-64086.herokuapp.com';
+  // let host = 'https://evening-falls-64086.herokuapp.com';
   // let host = 'http://localhost:3000';
+  let host = 'http://www.gogolchange.com';
+
 
 
   $scope.getExchangeRate = function (from, to) {
     $scope.exchs = _.filter($scope.rates, (rate) => {
-      return rate.from[0] === from && rate.to[0] === to;
+      return rate.from === from && rate.to === to;
     });
     // Запрос на сервер для получения результатов обмена:
     // $http.get(host +'/exchange/'+ from + '/' + to)
@@ -63,9 +68,13 @@ app.controller('exchangersCtrl', function ($scope, $http) {
 
   let sortVolutes = function (arr, way) {
     if (way === 'from') {
-      return _.uniqBy(_.map(arr, (n) => { return { currencyFrom: n.from[0]}}), 'currencyFrom');
+      return _.uniqBy(_.map(arr, (n) => { return { currencyFrom: n.from}}), 'currencyFrom');
     } else if (way === 'to') {
-      return _.uniqBy(_.map(arr, (n) => { return { currencyTo: n.to[0]}}), 'currencyTo');
+      return _.uniqBy(_.map(arr, (n) => { return { currencyTo: n.to}}), 'currencyTo');
+    } else if (way === 'ex') {
+     return _.size(_.uniqBy(_.map(arr, (n) => { return n.ex })));
+    } else if (way === 'para') {
+      return _.size(arr);
     }
   };
   
@@ -76,8 +85,12 @@ app.controller('exchangersCtrl', function ($scope, $http) {
       $scope.rates = result.data;
       $scope.volutesFrom = sortVolutes(result.data, 'from');
       $scope.volutesTo = sortVolutes(result.data, 'to');
+      $scope.nomberOfExchangers = sortVolutes(result.data, 'ex');
+      $scope.nomberOfcurrencyPare = sortVolutes(result.data, 'para');
 
-        console.log('Uniq => ',  $scope.volutesFrom);
+        console.log('Uniq from=> ',  $scope.volutesFrom);
+        console.log('Uniq to=> ',  $scope.volutesTo);
+
     }, function (err) {
       console.log('Err', err);
     });

@@ -20,12 +20,18 @@
 </head>
 <body ng-controller="exchangersCtrl">
 
-<nav class=" yellow accent-1">
+<nav class=" yellow accent-1 black-text">
     <div class="marging: 100px">
         <a href="#" class="brand-logo black-text" style="margin-left: 50px;">
             GOGOL
         </a>
+        <div style="margin-left: 400px">
 
+            <span class="black-text" ng-if="nomberOfcurrencyPare">
+                <span style="font-weight: bold">{{nomberOfcurrencyPare}}</span> курсов в
+                <span style="font-weight: bold">{{nomberOfExchangers}}</span> обменниках.
+            </span>
+        </div>
     </div>
 </nav>
 
@@ -107,16 +113,17 @@
             <tbody>
                 <tr ng-repeat="ex in exchs">
                     <td><a href="{{ex.startPage}}">{{ex.ex}}</a></td>
-                    <td>{{ex.in[0]  | currency:"" }} <span class="grey-text">({{ex.from[0]}})</span></td>
-                    <td>{{ex.out[0] | currency:""}} <span class="grey-text">({{ex.to[0]}})</span></td>
-                    <td>{{ex.amount[0] | currency:""}}</td>
-                    <td>{{ex.minamount[0] }}</td>
+                    <td>{{ex.in  | currency:"" }} <span class="grey-text">({{ex.from}})</span></td>
+                    <td>{{ex.out | currency:""}} <span class="grey-text">({{ex.to}})</span></td>
+                    <td>{{ex.amount | currency:""}}</td>
+                    <td>{{ex.minamount }}</td>
 
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 
 <footer class="page-footer yellow accent-1">
     <div class="container">

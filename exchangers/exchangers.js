@@ -44,32 +44,28 @@ module.exports = [
     startPage: 'https://payget.pro',
     url: 'https://payget.pro/valuta.xml'
   },
+/////////////
 
-
-  // {
-  //   name: 'obmennik',
-  //   url: 'https://obmennik.ws/rateES.xml'
-  // },
-  // {
-  //   name: 'superobmenka',
-  //   url: 'http://superobmenka.com/ru/export/xml'
-  // },
-  // {
-  //   name: 'idram',
-  //   url: 'https://idram.armchange.ru/exportxml.xml'
-  // },
-  // {
-  //   name: 'newline',
-  //   url: 'https://newline.online/exportxml.xml'
-  // },
-  // {
-  //   name: 'bankcomat',
-  //   url: 'https://bankcomat.com/valuta.xml'
-  // },
-  // {
-  //   name: 'buy-bitcoins',
-  //   url: 'https://www.buy-bitcoins.pro/request-exportxml.xml'
-  // }
+  {
+    name: 'obmennik',
+    url: 'https://obmennik.ws/rateES.xml'
+  },
+  {
+    name: 'idram',
+    url: 'https://idram.armchange.ru/exportxml.xml'
+  },
+  {
+    name: 'newline',
+    url: 'https://newline.online/exportxml.xml'
+  },
+  {
+    name: 'bankcomat',
+    url: 'https://bankcomat.com/valuta.xml'
+  },
+  {
+    name: 'buy-bitcoins',
+    url: 'https://www.buy-bitcoins.pro/request-exportxml.xml'
+  },
   // {
   //   name: 'cryptochange',
   //   url: 'https://cryptochange.net/curs.xml'

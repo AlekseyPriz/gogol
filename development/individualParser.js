@@ -7,10 +7,29 @@ const parseString = require('xml2js').parseString;
 const fs = require('fs');
 ////
 const exchenger = {
-    name: 'idram',
-   url: 'https://kassa.cc/valuta.xml'
-   // url: 'https://idram.armchange.ru/exportxml.xml'
-   //  url: 'https://bankcomat.com/valuta.xml'
+  // name: 'kassa',
+  // startPage: 'https://kassa.cc',
+  // url: 'https://kassa.cc/valuta.xml'
+
+  // name: 'idram.armchange',
+  // startPage: 'https://idram.armchange.ru',
+  // url: 'https://idram.armchange.ru/exportxml.xml'
+
+  // name: 'bankcomat',
+  // startPage: 'https://bankcomat.com',
+  //  url: 'https://bankcomat.com/valuta.xml'
+
+  // name: 'newline',
+  // startPage: 'https://newline.online',
+  // url: 'https://newline.online/exportxml.xml'
+
+  // name: 'buy-bitcoins',
+  // startPage: 'https://www.buy-bitcoins.pro',
+  // url: 'https://www.buy-bitcoins.pro/request-exportxml.xml'
+
+  name: 'cryptochange',
+  startPage: 'https://cryptochange.net',
+  url: 'https://cryptochange.net/curs.xml'
 
 
 };
@@ -21,27 +40,31 @@ function handler(response) {
     data += chunk;
   });
   response.on('end', function () {
-    process(data);
+    process(data, exchenger);
   });
 }
 
-function process(data) {
+function process(data, exchanger) {
+  //console.log('data =>', data);
   parseString(data, function (err, resultArr) {
-    console.log(exArrRefactoring(resultArr.rates.item));
+    if(!resultArr) {
+      console.log('Нет данных')
+    } else {
+      console.log(exArrRefactoring(resultArr.rates.item, exchanger));
+    }
   })
-};
+}
 
-function createExPare(item) {
-  for (key in item) {
-    item[key] = item[key][0];
-  }
+function createExPare(item, exchanger) {
+  for (key in item) { item[key] = item[key][0] }
+  item.ex = exchanger.name;
+  item.startPage = exchanger.startPage;
+
   return item;
 }
 
-function exArrRefactoring (exArr) {
-  return _.map(exArr, (eachItem) => {
-    return createExPare(eachItem);
-  });
+function exArrRefactoring (exArr, exchanger) {
+  return _.map(exArr, (eachItem) => { return createExPare(eachItem, exchanger); });
 }
 
 const request = https.request(exchenger.url);
